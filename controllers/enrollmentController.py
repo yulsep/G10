@@ -12,6 +12,7 @@ class EnrollmentController:
         :return:
         """
         print("Get all")
+        return self.enrollment_repository.find_all()
 
     def show(self, id_: str) -> dict:
         """
@@ -19,13 +20,16 @@ class EnrollmentController:
         :return:
         """
         print("Show by id")
+        return self.enrollment_repository.find_by_id(id_)
 
-    def create (self, enrollment: dict) -> dict:
+    def create (self, enrollment_: dict) -> dict:
         """
-        :param enrollment:
+        :param enrollment_:
         :return:
         """
         print("Insert")
+        enrollment = Enrollment(enrollment_)
+        return self.enrollment_repository.save(enrollment)
 
     def update(self, id_: str, enrollment_: dict) -> dict:
         """
@@ -36,6 +40,8 @@ class EnrollmentController:
         :return:
         """
         print("Update")
+        enrollment = Enrollment(enrollment_)
+        return self.enrollment_repository.update(id_, enrollment)
 
     def delete(self, id_: str) -> str:
         """
@@ -44,4 +50,6 @@ class EnrollmentController:
         :param id_:
         :return:
         """
-        print("Delete")
+        print("Delete" + id_)
+        return self.enrollment_repository.delete(id_)
+

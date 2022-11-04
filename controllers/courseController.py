@@ -1,16 +1,18 @@
 from models.course import Course
-from repositories.enrollmentRepository import EnrollmentRepository
+from repositories.courseRepository import CourseRepository
 
 
 class CourseController:
     def __init__(self):
         print("Course controller ready")
+        self.course_repository = CourseRepository()
 
     def index(self) -> list:
         """
         :return:
         """
         print("Get all")
+        return self.course_repository.find_all()
 
     def show(self, id_: str) -> dict:
         """
@@ -18,6 +20,7 @@ class CourseController:
         :return:
         """
         print("Show by id")
+        return self.course_repository.find_by_id(id_)
 
     def create (self, course_: dict) -> dict:
         """
@@ -25,6 +28,8 @@ class CourseController:
         :return:
         """
         print("Insert")
+        course = Course(course_)
+        return self.course_repository.save(course)
 
     def update(self, id_: str, course_: dict) -> dict:
         """
@@ -35,6 +40,8 @@ class CourseController:
         :return:
         """
         print("Update")
+        course = Course(course_)
+        return self.course_repository.update(id_, course)
 
     def delete(self, id_: str) -> str:
         """
@@ -44,3 +51,4 @@ class CourseController:
         :return:
         """
         print("Delete")
+        return self.course_repository.delete(id_)

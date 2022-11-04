@@ -12,6 +12,7 @@ class StudentController:
         This method gets all the students into the DB
         :return: student's list
         """
+        print("Get all")
         return self.student_repository.find_all()
 
     def show(self, id_: str) -> dict:
