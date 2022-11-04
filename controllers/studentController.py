@@ -1,22 +1,18 @@
 from models.student import Student
+from repositories.studentRepository import StudentRepository
 
 
 class StudentController:
     def __init__(self):
         print("Student controller ready")
+        self.student_repository = StudentRepository()
 
     def index(self) -> list:
         """
-        :return:
+        This method gets all the students into the DB
+        :return: student's list
         """
-        print("Get all")
-        data = {
-            "_id": "abc123",
-            "names": "Pepita",
-            "lastname": "Perez",
-            "persona_id": "123456",
-        }
-        return [data]
+        return self.student_repository.find_all()
 
     def show(self, id_: str) -> dict:
         """
@@ -24,13 +20,7 @@ class StudentController:
         :return:
         """
         print("Show by id")
-        data = {
-            "_id": id_,
-            "names": "Pepita",
-            "lastname": "Perez",
-            "persona_id": "123456",
-        }
-        return [data]
+        return self.student_repository.find_by_id(id_)
 
     def create (self, student_: dict) -> dict:
         """
@@ -39,7 +29,7 @@ class StudentController:
         """
         print("Insert")
         student = Student(student_)
-        return student.__dict__
+        return self.student_repository.save(student)
 
     def update(self, id_: str, student_: dict) -> dict:
         """
@@ -49,10 +39,8 @@ class StudentController:
         :return:
         """
         print("Update")
-        data = student_
-        data['_id'] = id_
         student = Student(student_)
-        return student.__dict__
+        return self.student_repository.update(id_, student)
 
     def delete(self, id_: str) -> str:
         """
@@ -61,4 +49,4 @@ class StudentController:
         :return:
         """
         print("Delete" + id_)
-        return {"Delete count": 1}
+        return self.student_repository.delete(id_)

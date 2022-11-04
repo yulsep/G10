@@ -1,9 +1,11 @@
 from models.enrollment import Enrollment
+from repositories.enrollmentRepository import EnrollmentRepository
 
 
 class EnrollmentController:
     def __init__(self):
         print("Enrollment controller ready")
+        self.enrollment_repository = EnrollmentRepository()
 
     def index(self) -> list:
         """

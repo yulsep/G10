@@ -1,4 +1,5 @@
 from models.course import Course
+from repositories.enrollmentRepository import EnrollmentRepository
 
 
 class CourseController:

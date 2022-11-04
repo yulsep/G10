@@ -1,5 +1,5 @@
 from models.departament import Department
-
+from repositories.enrollmentRepository import EnrollmentRepository
 
 class DepartmentController:
     def __init__(self):
